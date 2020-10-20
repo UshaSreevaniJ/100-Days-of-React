@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <meta content="utf-8">
+        <title>100 days of React!!!</title>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+        <style>
+            #container{
+              margin: 20px;  
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/babel">
+        var destination = document.querySelector("#container");
+
+
+class LightningCounterDisplay extends React.Component{
+
+    constructor(props,context)
+    {
+        super(props,context);
+
+        this.state={
+            strikes:0
+        };
+
+        this.timerTick = this.timerTick.bind(this); //to bind the strikes value to this component - Lightning counter display
+        }
+
+    componentDidMount()
+    {
+        setInterval(this.timerTick,1000);
+    }
+
+    timerTick()
+{
+    this.setState({
+        strikes: this.state.strikes + 100
+    });
+}
+
+    render()
+    {
+        return(
+            <div >
+                <p>{this.state.strikes}</p>
+                </div>
+        );
+    }
+}
+
+
+
+       class LightningCard extends React.Component{
+           render()
+           {
+               var LightningCardStyle={
+                   backgroundColor:"orange",
+                   width:"250px",
+                   borderRadius:10,
+                   padding:40,
+                   textAlign:"center"
+               }
+               return(
+                    <div style={LightningCardStyle}>
+                        <LightningCounterDisplay/>
+                    </div>
+               );
+           }
+       }
+
+      
+            ReactDOM.render(
+            <div>
+               <LightningCard/>
+                </div>, destination
+            );
+        </script>
+    </body>
+</html>
